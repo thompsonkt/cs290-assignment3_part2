@@ -5,3 +5,8 @@ Tasks: Inital work session
 Start: Sat, 31 Jan 2015 20:41:00 -0800
 End: Sat, 31 Jan 2015 22:51:16 -0800
 Tasks: Initial commit
+
+
+Start: Sat, 31 Jan 2015 23:00:00 -0800
+End: Sat, 31 Jan 2015 23:55:16 -0800
+Tasks: frustration with localstorage
