@@ -1,3 +1,11 @@
+Start: Fri, 30 Jan 2015 16:00:00 -0800
+End: Fri, 30 Jan 2015 17:59:21 -0800
+Tasks: Initial Commit, completed variables and functions
+
+Start: Sat, 31 Jan 2015 14:00:00 -0800
+End: Sat, 31 Jan 2015 15:35:18 -0800
+Tasks: Completed objects.js
+
 Start: Sat, 31 Jan 2015 17:30:00 -0800
 End: Sat, 31 Jan 2015 18:00:00 -0800
 Tasks: Inital work session
