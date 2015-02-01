@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title> </title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script> 
+  </head>
+  <body>
+    <div>
+      <form>
+        Pages: <input type="text" name="pages" id="pagesRequested">
+        <br><input type="checkbox" name="language" value="Python">Python
+        <br><input type="checkbox" name="language" value="JSON">JSON
+        <br><input type="checkbox" name="language" value="JavaScript ">JavaScript 
+        <br><input type="checkbox" name="language" value="SQL">SQL
+        <br><input type="button" value="Search" onclick="searchGit()">
+      </form>
+    </div>
+    <div id="searchResultsDiv">
+      <p>
+        Search Results
+      </p>
+      <table id="resultsTable">
+      </table>
+    </div>
+    <div id="favoritesDiv">
+      <p>
+        Favorites
+      </p>
+    </div>
+  </body>
+</html>
