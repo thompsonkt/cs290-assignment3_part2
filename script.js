@@ -1,3 +1,31 @@
+window.onload = function() {
+  var favoritesStr = localStorage.getItem('favorites');
+  if (favoritesStr === null) {
+    settings = {'favorites':[]};
+    localStorage.setItem('favorites',JSON.stringify(settings));
+  }
+  else {
+    settings = JSON.parse(favoritesStr);
+    displayFavorites();
+  }
+}
+
+function Favorite(description, url) {
+  this.description = description;
+  this.url = url;
+}
+
+function addFavorite(settings, favorite) {
+  if (favorite instanceof Favorite) {
+    settings.favorites.push(favorite);
+    localStorage.setItem('favorites', JSON.stringify(settings));
+    displayFavorites();
+    return true;
+  }
+  console.error('Attempted to add non-favorite');
+  return false;
+}
+
 function searchGit() {
   var pages = document.getElementById("pagesRequested");
   if (pages.value < 1 || pages.value > 5)
@@ -46,7 +74,7 @@ function load_tables(response) {
   var tHeadRow = document.createElement("tr");
   var tHeadCell1 = document.createElement("th");
   var tHeadCell2 = document.createElement("th");
-  var tHeadCellText = document.createTextNode("Favorites");
+  var tHeadCellText = document.createTextNode("Add to Favs");
   tHeadCell1.appendChild(tHeadCellText);
   tHeadRow.appendChild(tHeadCell1);
   tHeadCellText = document.createTextNode("Gist Description");
@@ -98,6 +126,73 @@ function load_tables(response) {
 }
 
 function addToFavorites(description, url) {
-  alert("Adding " + description + " to favorites");
-  alert("URL " + url);
+  var f = new Favorite(description, url);
+  addFavorite(settings, f);
+}
+
+function displayFavorites() {
+
+  /* Replace existing table */
+  var favoritesDiv = document.getElementById("favoritesDiv");
+  var oldFavoritesTable = document.getElementById("favoritesTable");
+  
+  var table = document.createElement("table");
+  table.setAttribute('id',"favoritesTable");
+  var tableHead = document.createElement("thead");
+  var tHeadRow = document.createElement("tr");
+  var tHeadCell1 = document.createElement("th");
+  var tHeadCell2 = document.createElement("th");
+  var tHeadCellText = document.createTextNode("Remove from Favs");
+  tHeadCell1.appendChild(tHeadCellText);
+  tHeadRow.appendChild(tHeadCell1);
+  tHeadCellText = document.createTextNode("Gist Description");
+  tHeadCell2.appendChild(tHeadCellText);
+  tHeadRow.appendChild(tHeadCell2);
+  tableHead.appendChild(tHeadRow);
+  table.appendChild(tableHead);
+  
+  var tableBody = document.createElement("tbody");
+  
+  for (var key in settings)
+  {
+    if (settings.hasOwnProperty(key)) {
+      if (key == "favorites") {
+      var favs = 
+        for (var subkey in key) {
+          var row = document.createElement("tr");
+          
+          for (var i=0; i < 2; i++) {
+            
+            var cell = document.createElement("td");
+            
+            if (i == 0) {
+              var button = document.createElement("input");
+              button.setAttribute('type',"button");
+              button.setAttribute('value',"remove");
+              button.setAttribute('onclick',"removeFromFavorites('" + key[subkey].description + "','" + key[subkey].url + "')");
+              cell.appendChild(button);
+            }
+            else {
+              var cellA = document.createElement("a");
+              var description = key[subkey].description;
+              if (description == "") {
+                description = "No Description";
+                cell.style.fontStyle="italic"
+              }
+              var cellText = document.createTextNode(description);
+              cellA.setAttribute('href', key[subkey].url);
+              cellA.appendChild(cellText);
+              cell.appendChild(cellA);
+            }
+            row.appendChild(cell);
+          }
+          tableBody.appendChild(row);
+         }
+      }
+    }
+  }
+      
+  table.appendChild(tableBody);
+  favoritesDiv.replaceChild(table, oldFavoritesTable);
+
 }
